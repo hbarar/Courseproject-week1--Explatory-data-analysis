@@ -6,15 +6,24 @@ Then to plot the requested images , we assign a new vector for each coloumns and
 
 
 # Codes 
+
 plot1.R  ( histogram)
+
 plot2.R  ( 2D plot )
+
 plot3.R  ( 3 lines in one image )--legend()
+
 plot4.R   (multiple images in one png file)--par()
 
+
 # Images 
+
 plot1.png
+
 plot2.png
+
 plot3.png
+
 plot4.png
 
 
