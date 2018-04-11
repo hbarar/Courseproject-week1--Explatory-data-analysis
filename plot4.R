@@ -1,0 +1,54 @@
+
+
+library(lubridate)
+
+setwd("C:\\Users\\hassan\\Desktop\\TEST")
+dir()
+
+
+#READING  The text file
+dev.off()
+data<- read.table("./household_power_consumption.txt",header = T,sep=";") 
+sd<-subset(data,Date=="1/2/2007"| Date=="2/2/2007")
+#---------------------------------
+
+datetime <- strptime(paste(sd$Date,sd$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+
+
+SM1<-as.numeric(as.character(sd$Sub_metering_1))
+SM2<-as.numeric(as.character(sd$Sub_metering_2))
+SM3<-as.numeric(as.character(sd$Sub_metering_3))
+GW<-as.numeric(as.character(sd$Global_active_power))
+VO<-as.numeric(as.character(sd$Voltage))
+GRP<-as.numeric(as.character(sd$Global_reactive_power))
+
+par(mfrow=c(2,2))
+
+par(mar=c(3,2,1,2))
+
+#========================= Plot (1,1)
+plot(datetime,GW,type="l",xlab = " ",ylab="Global Active Power (kilowatts)")
+#========================= plot(1,2)
+par(mar=c(3,2,1,1))
+
+plot(datetime,VO,type="l",xlab = "datetime ",ylab="Voltage")
+#======================== plot(2,1)
+par(mar=c(3,2,2,2))
+
+plot(datetime,SM1,type="l",xlab = " ",ylab="Energy sub metering ",col="black")
+lines(datetime,SM2,type="l",xlab = " ",col="red")
+lines(datetime,SM3,type="l",xlab = " ",col="blue")
+
+legend("topright",legend=c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"),
+       col=c("black","red", "blue"),lty=1,bty="n")
+#====================== plot(2,2)
+par(mar=c(3,2,2,1))
+
+plot(datetime,GRP,type="l",xlab = "datetime ",ylab="Global_reactive_power ",col="black")
+
+
+dev.copy(png,file = "plot4.png",width = 480, height = 480)
+dev.off()
+
+
+
